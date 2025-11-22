@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portfolio | Aakarsh Raj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* ---------- Base Styles ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.15);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --card: #111827;
+      --border: rgba(255, 255, 255, 0.06);
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.5);
+      --radius-xl: 18px;
+      --radius-2xl: 24px;
+      --transition-fast: 0.2s ease-out;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1d2438 0, #050816 52%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ---------- Layout ---------- */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 4.5rem 0;
+    }
+
+    @media (min-width: 768px) {
+      section {
+        padding: 5.5rem 0;
+      }
+    }
+
+    /* ---------- Navbar ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 8, 22, 0.95),
+        rgba(5, 8, 22, 0.7),
+        transparent
+      );
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .logo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(79, 70, 229, 0.8);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      position: relative;
+      padding-bottom: 0.25rem;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 999px;
+      transition: width var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      background: rgba(15, 23, 42, 0.75);
+      font-size: 0.8rem;
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav-cta {
+        display: inline-flex;
+      }
+    }
+
+    /* ---------- Hero ---------- */
+    #home {
+      min-height: calc(100vh - 64px);
+      display: flex;
+      align-items: center;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr;
+      gap: 3rem;
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center;
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1.15rem;
+    }
+
+    .hero-badge span {
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #c7d2fe;
+      font-weight: 500;
+      font-size: 0.7rem;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.85rem;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 2.8rem;
+      }
+    }
+
+    .hero-title span {
+      color: #c7d2fe;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      max-width: 30rem;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.7rem 1.25rem;
+      font-size: 0.85rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast), background var(--transition-fast),
+        border-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      color: white;
+      box-shadow: 0 14px 38px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 45px rgba(37, 99, 235, 0.7);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text);
+      border-color: var(--accent-soft);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta-block span:first-child {
+      display: block;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Hero right */
+    .hero-card {
+      border-radius: var(--radius-2xl);
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top left, #1e293b 0, #020617 52%);
+      box-shadow: var(--shadow-soft);
+      padding: 1.4rem 1.4rem 1.7rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 30px;
+      object-fit: cover;
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.8);
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 1rem;
+    }
+
+    .hero-role {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-highlight {
+      display: grid;
+      gap: 0.65rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .pill {
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 0.7rem;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 1.3rem;
+      font-size: 0.78rem;
+    }
+
+    .hero-stats strong {
+      display: block;
+      font-size: 1rem;
+      color: #e5e7eb;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.35);
+      opacity: 0.9;
+    }
+
+    .hero-orbit-dot {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: #22c55e;
+      top: 28%;
+      left: 8%;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.8);
+    }
+
+    /* ---------- Section Titles ---------- */
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---------- About ---------- */
+    .about-grid {
+      display: grid;
+      gap: 1.8rem;
+    }
+
+    @media (min-width: 850px) {
+      .about-grid {
+        grid-template-columns: 1.3fr 1fr;
+        align-items: start;
+      }
+    }
+
+    .about-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .about-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.85);
+      padding: 1.1rem 1.1rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .about-card strong {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    /* ---------- Skills ---------- */
+    .skills-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 720px) {
+      .skills-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .skill-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.85);
+      padding: 1rem 1.1rem 1.2rem;
+      font-size: 0.82rem;
+    }
+
+    .skill-card h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .skill-tag {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #c7d2fe;
+      border: 1px solid rgba(129, 140, 248, 0.4);
+    }
+
+    
+    .projects-grid {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    @media (min-width: 720px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .project-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 1rem 1.1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .project-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .project-meta {
+      font-size: 0.76rem;
+      color: #a5b4fc;
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .project-links {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.7rem;
+      font-size: 0.78rem;
+    }
+
+    .project-links a {
+      color: #c7d2fe;
+    }
+
+    /* ---------- Contact ---------- */
+    .contact-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 850px) {
+      .contact-grid {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center;
+      }
+    }
+
+    .contact-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .contact-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 1rem 1.1rem 1.2rem;
+      font-size: 0.84rem;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+    }
+
+    .contact-row span:first-child {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .contact-row a {
+      color: #c7d2fe;
+    }
+
+    
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.4rem 0 2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .socials a {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    /* ---------- Small Screen Tweaks ---------- */
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ---------- Navbar ---------- -->
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="logo-dot"></div>
+        <span>Aakarsh&nbsp;Raj</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a href="#contact" class="nav-cta">Let’s talk</a>
+    </div>
+  </header>
+
+  <!-- ---------- Hero ---------- -->
+  <main>
+    <section id="home">
+      <div class="container hero">
+        <div>
+          <div class="hero-badge">
+            <span>Available</span>
+            Open for freelance & projects
+          </div>
+
+          <h1 class="hero-title">
+            Hi, I’m <span>Aakarsh Raj</span> <br />
+            Game Developer & Problem Solver.
+          </h1>
+
+          <p class="hero-subtitle">
+            I build clean, fast and user-focused experiences. From idea to
+            deploy, I enjoy turning problems into simple, elegant solutions.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#" class="btn-primary">Download CV ▾</a>
+            <a href="#projects" class="btn-ghost">View my projects →</a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="hero-meta-block">
+              <span>Tech Stack</span>
+              <span>HTML • CSS • JavaScript • C/C++ • Python</span>
+            </div>
+            <div class="hero-meta-block">
+              <span>Based in</span>
+              <span>Bijnor, India</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <img src="aakarsh.jpg" class="hero-photo" alt="Aakarsh Raj profile photo">
+
+          <div class="hero-role">
+            • Game Developer<br />
+            • Student / Learner<br />
+            • Open to collabs
+          </div>
+
+          <div class="hero-highlight">
+            <div class="hero-pill-row">
+              <span class="pill">Responsive Web</span>
+              <span class="pill">Clean UI</span>
+              <span class="pill">Problem Solving</span>
+            </div>
+            <p>
+              Passionate about building projects that actually get used – not
+              just stay in the tutorial zone.
+            </p>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <strong>Coming soon</strong>
+              Personal projects
+            </div>
+            <div>
+              <strong>4+</strong>
+              Years of learning
+            </div>
+          </div>
+
+          <div class="hero-orbit">
+            <div class="hero-orbit-dot"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ---------- About ---------- -->
+    <section id="about">
+      <div class="container">
+        <p class="section-label">About</p>
+        <h2 class="section-title">Who I am</h2>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              I’m a developer who enjoys learning by building. I like combining
+              logic with clean design, and I’m always experimenting with new
+              tools, frameworks, and side projects.
+            </p>
+            <p>
+              Whether it’s a small script that saves a few minutes every day, a
+              landing page for a project, or a full portfolio website, I love
+              coding things that feel smooth and intuitive to use.
+            </p>
+            <p>
+              Right now, I’m focused on improving my core fundamentals,
+              exploring game development, and building a solid portfolio step
+              by step.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <strong>Quick facts</strong>
+            <ul style="list-style: none; display: grid; gap: 0.25rem;">
+              <li>• 🌱 I’m currently learning: Game development</li>
+              <li>• 💬 Ask me about: Collaboration, Tech Support</li>
+              <li>• 🎯 Goal: Become a strong game dev</li>
+              <li>• ☕ Fuel: Coffee + late-night debugging</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Skills ---------- -->
+    <section id="skills">
+      <div class="container">
+        <p class="section-label">Skills</p>
+        <h2 class="section-title">What I work with</h2>
+
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3>Frontend</h3>
+            <p>
+              I like creating responsive, clean UIs that work well on both
+              mobile and desktop.
+            </p>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">JavaScript</span>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <h3>Programming</h3>
+            <p>
+              Strong fundamentals with focus on problem solving and clean code.
+            </p>
+            <div class="skill-tags">
+              <span class="skill-tag">C</span>
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">Python</span>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <h3>Tools</h3>
+            <p>
+              Comfortable with the tools used in a modern dev workflow.
+            </p>
+            <div class="skill-tags">
+              <span class="skill-tag">VS Code</span>
+              <span class="skill-tag">Git & GitHub</span>
+              <span class="skill-tag">Chrome DevTools</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Projects ---------- -->
+    <section id="projects">
+      <div class="container">
+        <p class="section-label">Projects</p>
+        <h2 class="section-title">Things I’ve built</h2>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-title">Personal Portfolio Website</div>
+            <div class="project-meta">HTML • CSS • JS</div>
+            <p class="project-desc">
+              A responsive portfolio site to showcase my skills, projects, and
+              contact details. Built from scratch without using any CSS
+              framework.
+            </p>
+            <div class="project-links">
+              <a href="#" target="_blank">Live demo ↗</a>
+              <a href="#" target="_blank">Source code ↗</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-title">Mini Projects Collection</div>
+            <div class="project-meta">C/C++ • Problem Solving</div>
+            <p class="project-desc">
+              A set of small console-based programs like number checkers,
+              patterns, and simple games, focused on learning core logic.
+            </p>
+            <div class="project-links">
+              <a href="#" target="_blank">GitHub repo ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Contact ---------- -->
+    <section id="contact">
+      <div class="container">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title">Let’s connect</h2>
+
+        <div class="contact-grid">
+          <div class="contact-text">
+            <p>
+              Want to collaborate, have a project idea, or just want to say
+              hi? Drop me a message — I’m always open to interesting
+              conversations and opportunities.
+            </p>
+            <p>
+              You can reach me directly via email or connect with me on my
+              social platforms below.
+            </p>
+          </div>
+
+          <div class="contact-card">
+            <strong>Contact details</strong>
+            <div class="contact-row">
+              <span>Email</span>
+              <a href="mailto:youremail@example.com">youremail@example.com</a>
+            </div>
+            <div class="contact-row">
+              <span>Location</span>
+              <span>Bijnor, India</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ---------- Footer ---------- -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Aakarsh Raj. All rights reserved.</div>
+      <div class="socials">
+        <a href="#" target="_blank">GitHub</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ---------- Small JS ---------- -->
+  <script>
+    // Auto-update year in footer
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
